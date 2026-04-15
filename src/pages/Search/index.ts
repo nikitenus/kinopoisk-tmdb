@@ -1,1 +1,1 @@
-export {Favorites} from './Favorites.tsx'
+export {Search} from './Search.tsx'

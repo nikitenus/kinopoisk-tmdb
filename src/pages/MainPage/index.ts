@@ -1,1 +1,1 @@
-export {Favorites} from './Favorites.tsx'
+export { MainPage } from "./MainPage"

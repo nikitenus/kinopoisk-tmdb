@@ -1,0 +1,1 @@
+export {CategoryMovies} from './CategoryMovies.tsx'
