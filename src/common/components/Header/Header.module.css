@@ -1,11 +1,35 @@
 .container {
     border-bottom: 1px solid black;
-    padding-left: 100px;
+    padding: 12px 24px;
+
+}
+
+.wrapper {
+    display: flex;
+    max-width: 1440px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.logoWrap {
+    display: inline-flex;
+}
+
+.logo {
+    width: 130px;
+}
+
+.nav {
+    /*margin-left: auto;*/
 }
 
 .list {
     display: flex;
     gap: 40px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .activeLink {
