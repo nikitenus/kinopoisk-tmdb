@@ -1,36 +1,64 @@
 import {NavLink} from "react-router"
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Toolbar from "@mui/material/Toolbar"
+import Container from "@mui/material/Container"
+import Button from "@mui/material/Button"
+import IconButton from "@mui/material/IconButton"
+import LightModeIcon from "@mui/icons-material/LightMode"
+import DarkModeIcon from "@mui/icons-material/DarkMode"
 import {navItems} from "./navItems"
-import s from "./Header.module.css"
-import logo from '@/assets/logo.svg'
+import logo from "@/assets/logo.svg"
+import {useTheme} from "@mui/material";
 
-export const Header = () => {
+type Props = {
+    changeThemeMode: () => void
+}
+
+
+export const Header = ({changeThemeMode}: Props) => {
+    const theme = useTheme()
+    const isLight = theme.palette.mode === 'light'
+
     return (
-        <header className={s.container}>
-            <div className={s.wrapper}>
-                <NavLink to={'/'} className={s.logoWrap}>
-                    <img src={logo} alt="logo" className={s.logo}/>
-                </NavLink>
+        <AppBar position="static" color="transparent" elevation={0}>
+            <Container maxWidth="xl">
+                <Toolbar disableGutters sx={{
+                    position: "relative",
+                    minHeight: 80,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                }}>
+                    <Box component={NavLink} to="/" sx={{display: "inline-flex", zIndex: 1}}>
+                        <Box component="img" src={logo} alt="logo" sx={{width: 130}}/>
+                    </Box>
 
-                <nav className={s.nav}>
-                    <ul className={s.list}>
+                    <Box sx={{
+                        position: "absolute",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        display: "flex",
+                        gap: 2,
+                    }}>
                         {navItems.map((item) => (
-                            <li key={item.to}>
-                                <NavLink
-                                    to={item.to}
-                                    className={({isActive}) => `link ${isActive ? s.activeLink : ""}`}
-                                >
-                                    {item.label}
-                                </NavLink>
-                            </li>
+                            <Button
+                                key={item.to}
+                                component={NavLink}
+                                to={item.to}
+                                color="inherit"
+                                sx={{"&.active": {fontWeight: 700, textDecoration: "underline"}}}
+                            >
+                                {item.label}
+                            </Button>
                         ))}
-                    </ul>
-                </nav>
+                    </Box>
 
-                <button className={s.themeBtn} type="button">
-                    {/*{theme === "light" ? "🌙 Dark" : "☀️ Light"}*/}
-                    🌙
-                </button>
-            </div>
-        </header>
+                    <IconButton color="inherit" sx={{zIndex: 1}} onClick={changeThemeMode}>
+                        {isLight ? <DarkModeIcon/> : <LightModeIcon/>}
+                    </IconButton>
+                </Toolbar>
+            </Container>
+        </AppBar>
     )
 }
