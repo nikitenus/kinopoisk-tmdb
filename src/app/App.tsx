@@ -26,12 +26,14 @@ export function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline enableColorScheme />
-            <Header changeThemeMode={changeThemeMode}/>
-            <div className={s.layout}>
-                <Routing/>
+            <CssBaseline enableColorScheme/>
+            <div className={s.page}>
+                <Header changeThemeMode={changeThemeMode}/>
+                <main className={s.main}>
+                    <Routing/>
+                </main>
+                <footer className={s.footer}>© 2025 Kinopoisk Demo · Data courtesy of TMDB.</footer>
             </div>
-            Футер
         </ThemeProvider>
     )
 }
