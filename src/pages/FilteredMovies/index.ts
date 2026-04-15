@@ -1,0 +1,1 @@
+export {FilteredMovies} from './FilteredMovies.tsx'
