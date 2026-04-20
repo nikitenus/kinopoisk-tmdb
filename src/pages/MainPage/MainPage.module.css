@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.backdrop {
+    width: 100vw;
+    min-height: 700px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.items {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.item {
+    width: 240px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.poster {
+    width: 100px;
+}
