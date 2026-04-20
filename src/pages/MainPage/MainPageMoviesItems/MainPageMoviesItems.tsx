@@ -1,5 +1,5 @@
 import type { FetchMoviesResponse } from "@/features/movies/api/moviesApi.types.ts"
-import s from "@/pages/MainPage/MainPage.module.css"
+import s from "./MainPageMoviesItems.module.css"
 
 type Props = {
   data?: FetchMoviesResponse
@@ -8,21 +8,23 @@ type Props = {
 
 export const MainPageMoviesItems = ({ data, title }: Props) => {
   return (
-    <div>
+    <div className={s.container}>
       <h2>{title}</h2>
       <div className={s.items}>
         {data?.results.slice(0, 6).map((movie) => {
           return (
-            <div key={movie.id}>
+            <div
+              key={movie.id}
+              className={s.movieContainer}
+            >
               <div>
-                poster:
                 <img
                   src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                   alt="poster"
                   className={s.poster}
                 />
               </div>
-              <div>title: {movie.title}</div>
+              <div>{movie.title}</div>
             </div>
           )
         })}

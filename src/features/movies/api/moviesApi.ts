@@ -18,7 +18,13 @@ export const moviesApi = createApi({
     getPopularMovies: build.query<FetchMoviesResponse, { language?: string; page?: number; region?: string } | void>({
       query: () => "movie/popular",
     }),
+    getTopRatedMovies: build.query<FetchMoviesResponse, { language?: string; page?: number; region?: string } | void>({
+      query: () => "movie/top_rated",
+    }),
+    getUpcomingMovies: build.query<FetchMoviesResponse, { language?: string; page?: number; region?: string } | void>({
+      query: () => "movie/upcoming",
+    }),
   }),
 })
 
-export const { useGetNowPlayingMoviesQuery, useGetPopularMoviesQuery } = moviesApi
+export const { useGetNowPlayingMoviesQuery, useGetPopularMoviesQuery, useGetTopRatedMoviesQuery, useGetUpcomingMoviesQuery,  } = moviesApi
