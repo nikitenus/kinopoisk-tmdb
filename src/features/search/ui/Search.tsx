@@ -1,25 +1,33 @@
 import s from "./Search.module.css";
-import {useState} from "react";
-import {useLazySearchMovieQuery} from "@/features/movies/api/moviesApi.ts";
+import {useEffect, useState} from "react";
 
-export const Search = () => {
-    const [query, setQuery] = useState<string>("")
-    const [triggerSearchMovie] = useLazySearchMovieQuery()
+type Props = {
+    onSearch: (query: string) => void
+    initialQuery?: string
+}
+
+export const Search = ({onSearch, initialQuery = ""}: Props) => {
+    const [query, setQuery] = useState<string>(initialQuery)
+
+    useEffect(() => {
+        setQuery(initialQuery)
+    }, [initialQuery])
 
     const handleSearchClick = () => {
         const normalizedQuery = query.trim()
         if (!normalizedQuery) return
-        triggerSearchMovie({query: normalizedQuery})
+        onSearch(normalizedQuery)
     }
 
     return (
         <div className={s.searchInner}>
             <input
                 type="search"
-                placeholder={"SearchPage for a movie"}
+                placeholder={"Search for a movie"}
+                value={query}
                 onChange={(e) => setQuery(e.currentTarget.value)}
             />
-            <button onClick={handleSearchClick}>Search</button>
+            <button disabled={!query.trim()} onClick={handleSearchClick}>Search</button>
         </div>
     );
 };

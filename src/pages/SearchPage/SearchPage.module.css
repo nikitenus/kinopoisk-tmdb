@@ -6,7 +6,7 @@
     flex-direction: column;
     gap: 30px;
     min-width: 500px;
-    color: inherit; /* или #111 */
+    color: inherit;
 }
 
 .searchPage h2 {
@@ -17,4 +17,18 @@
 
 .searchPage p {
     margin: 0;
+    font-size: 13px;
+    color: #4b5563;
+
+}
+
+.searchPage {
+    --search-input-bg: #f3f5f8;
+}
+
+.movieItemsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
 }
