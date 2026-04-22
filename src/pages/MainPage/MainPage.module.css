@@ -52,18 +52,4 @@
     padding-left: 16px;
 }
 
-.searchInner {
-    display: flex;
-    gap: 30px;
-    width: 100%;
-    max-width: 560px;
-}
-
-.searchInner button {
-    border-radius: 20px;
-    border: none;
-    background-color: #4c4cda;
-    padding: 8px 16px;
-    font-size: 16px;
-}
 

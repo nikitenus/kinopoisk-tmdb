@@ -4,25 +4,15 @@ import {
     useGetPopularMoviesQuery,
     useGetTopRatedMoviesQuery,
     useGetUpcomingMoviesQuery,
-    useLazySearchMovieQuery,
 } from "@/features/movies/api/moviesApi.ts"
-import {MainPageMoviesItems} from "@/pages/MainPage/MainPageMoviesItems/MainPageMoviesItems.tsx"
-import {useState} from "react";
+import {MovieItems} from "@/features/movies/ui/MovieItems/MovieItems.tsx"
+import {Search} from "@/features/movies/ui/Search/Search.tsx";
 
 export const MainPage = () => {
-    const [query, setQuery] = useState<string>("")
-
     const {data: popular} = useGetPopularMoviesQuery()
     const {data: topRated} = useGetTopRatedMoviesQuery()
     const {data: nowPlaying} = useGetNowPlayingMoviesQuery()
     const {data: upcoming} = useGetUpcomingMoviesQuery()
-    const [triggerSearchMovie] = useLazySearchMovieQuery()
-
-    const handleSearchClick = () => {
-        const normalizedQuery = query.trim()
-        if (!normalizedQuery) return
-        triggerSearchMovie({query: normalizedQuery})
-    }
 
     return (
         <>
@@ -37,30 +27,23 @@ export const MainPage = () => {
                 <div className={s.search}>
                     <h1>Welcome</h1>
                     <h2>Browse highlighted titles from TMDB</h2>
-                    <div className={s.searchInner}>
-                        <input
-                            type="search"
-                            placeholder={"Search for a movie"}
-                            onChange={(e) => setQuery(e.currentTarget.value)}
-                        />
-                        <button onClick={handleSearchClick}>Search</button>
-                    </div>
+                    <Search/>
                 </div>
             </div>
             <div className={s.container}>
-                <MainPageMoviesItems
+                <MovieItems
                     data={popular}
                     title={"Popular Movies"}
                 />
-                <MainPageMoviesItems
+                <MovieItems
                     data={topRated}
                     title={"Top rated Movies"}
                 />
-                <MainPageMoviesItems
+                <MovieItems
                     data={nowPlaying}
                     title={"Upcoming Movies"}
                 />
-                <MainPageMoviesItems
+                <MovieItems
                     data={upcoming}
                     title={"Now Playing Movies"}
                 />

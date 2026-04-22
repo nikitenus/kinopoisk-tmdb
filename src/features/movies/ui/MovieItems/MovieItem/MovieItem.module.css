@@ -1,0 +1,57 @@
+.movieContainer {
+    height: 330px;
+    width: 180px;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.posterLink {
+    display: block;
+    width: 180px;
+    text-decoration: none;
+}
+
+.posterFrame {
+    width: 180px;
+    height: 270px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.posterBg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.25s ease;
+}
+
+.posterLink:hover .posterBg {
+    transform: scale(1.06);
+}
+
+
+.rating {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 5px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.ratingHigh {
+    background-color: #2e7d32; /* зелёный */
+}
+
+.ratingMedium {
+    background-color: #f9a825; /* жёлтый */
+}
+
+.ratingLow {
+    background-color: #c62828; /* красный */
+}
