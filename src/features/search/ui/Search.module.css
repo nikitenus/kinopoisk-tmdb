@@ -5,6 +5,14 @@
     max-width: 560px;
 }
 
+.searchInner input {
+    border-radius: 20px;
+    height: 40px;
+    border: none;
+    width: 100%;
+    padding-left: 16px;
+}
+
 .searchInner button {
     border-radius: 20px;
     border: none;

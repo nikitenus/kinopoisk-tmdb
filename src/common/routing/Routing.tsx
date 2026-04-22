@@ -3,7 +3,7 @@ import { Path } from "./path"
 import { MainPage } from "@/pages/MainPage/MainPage"
 import { CategoryMovies } from "@/pages/CategoryMovies"
 import { FilteredMovies } from "@/pages/FilteredMovies"
-import { Search } from "@/pages/Search"
+import { SearchPage } from "@/pages/SearchPage"
 import { Favorites } from "@/pages/Favorites"
 import { PageNotFound } from "@/pages/PageNotFound"
 
@@ -24,7 +24,7 @@ export const Routing = () => {
       />
       <Route
         path={Path.Search}
-        element={<Search />}
+        element={<SearchPage />}
       />
       <Route
         path={Path.Favorites}

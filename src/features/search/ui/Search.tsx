@@ -16,7 +16,7 @@ export const Search = () => {
         <div className={s.searchInner}>
             <input
                 type="search"
-                placeholder={"Search for a movie"}
+                placeholder={"SearchPage for a movie"}
                 onChange={(e) => setQuery(e.currentTarget.value)}
             />
             <button onClick={handleSearchClick}>Search</button>

@@ -6,7 +6,7 @@ import {
     useGetUpcomingMoviesQuery,
 } from "@/features/movies/api/moviesApi.ts"
 import {MovieItems} from "@/features/movies/ui/MovieItems/MovieItems.tsx"
-import {Search} from "@/features/movies/ui/Search/Search.tsx";
+import {Search} from "@/features/search/ui/Search.tsx";
 
 export const MainPage = () => {
     const {data: popular} = useGetPopularMoviesQuery()
