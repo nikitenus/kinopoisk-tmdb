@@ -14,7 +14,13 @@ export const MovieItems = ({data, title}: Props) => {
             <div className={s.items}>
                 {data?.results.slice(0, 6).map((movie) => {
                     return (
-                        <MovieItem voteAverage={movie.vote_average} title={movie.title} posterPath={movie.poster_path} key={movie.id}/>
+                        <MovieItem
+                            id={movie.id}
+                            voteAverage={movie.vote_average}
+                            title={movie.title}
+                            posterPath={movie.poster_path}
+                            key={movie.id}
+                        />
                     )
                 })}
             </div>

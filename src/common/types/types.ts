@@ -14,3 +14,10 @@ export type Movie = {
   vote_average: number
   vote_count: number
 }
+
+export type FavoriteMovie = {
+  id: number
+  title: string
+  poster_path: string | null
+  vote_average: number
+}

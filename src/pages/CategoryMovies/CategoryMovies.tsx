@@ -82,6 +82,7 @@ export const CategoryMovies = () => {
             {activeQuery.data.results.map((movie) => (
               <MovieItem
                 key={movie.id}
+                id={movie.id}
                 title={movie.title}
                 posterPath={movie.poster_path}
                 voteAverage={movie.vote_average}
