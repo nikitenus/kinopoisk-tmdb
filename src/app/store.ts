@@ -1,13 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { moviesApi } from "@/features/movies/api/moviesApi.ts"
-
+import { baseApi } from "@/app/baseApi.ts"
 
 export const store = configureStore({
   reducer: {
-    [moviesApi.reducerPath]: moviesApi.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(moviesApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
 })
 
 setupListeners(store.dispatch)

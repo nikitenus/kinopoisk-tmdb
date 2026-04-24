@@ -1,60 +1,52 @@
-import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
-import type {FetchMoviesResponse, SearchMovieArgs, SearchMoviesResponse} from "@/features/movies/api/moviesApi.types.ts"
+import type { FetchMoviesResponse } from "@/features/movies/api/moviesApi.types.ts"
+import { baseApi } from "@/app/baseApi.ts"
 
-export const moviesApi = createApi({
-    reducerPath: "moviesApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl: import.meta.env.VITE_BASE_URL,
-        prepareHeaders: (headers) => {
-            headers.set("Authorization", `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`)
-            return headers
-        },
+export const moviesApi = baseApi.injectEndpoints({
+  endpoints: (build) => ({
+    getNowPlayingMovies: build.query<
+      FetchMoviesResponse,
+      {
+        language?: string
+        page?: number
+        region?: string
+      } | void
+    >({ query: () => "movie/now_playing" }),
+    getPopularMovies: build.query<
+      FetchMoviesResponse,
+      {
+        language?: string
+        page?: number
+        region?: string
+      } | void
+    >({
+      query: () => "movie/popular",
     }),
-    tagTypes: ["Movie"],
-    endpoints: (build) => ({
-        getNowPlayingMovies: build.query<FetchMoviesResponse, {
-            language?: string;
-            page?: number;
-            region?: string
-        } | void>(
-            {query: () => "movie/now_playing"},
-        ),
-        getPopularMovies: build.query<FetchMoviesResponse, {
-            language?: string;
-            page?: number;
-            region?: string
-        } | void>({
-            query: () => "movie/popular",
-        }),
-        getTopRatedMovies: build.query<FetchMoviesResponse, {
-            language?: string;
-            page?: number;
-            region?: string
-        } | void>({
-            query: () => "movie/top_rated",
-        }),
-        getUpcomingMovies: build.query<FetchMoviesResponse, {
-            language?: string;
-            page?: number;
-            region?: string
-        } | void>({
-            query: () => "movie/upcoming",
-        }),
-        searchMovie: build.query<SearchMoviesResponse, SearchMovieArgs>(
-            {
-                query: (params) => {
-                    return {url: "/search/movie", params}
-                }
-            },
-        ),
+    getTopRatedMovies: build.query<
+      FetchMoviesResponse,
+      {
+        language?: string
+        page?: number
+        region?: string
+      } | void
+    >({
+      query: () => "movie/top_rated",
     }),
+    getUpcomingMovies: build.query<
+      FetchMoviesResponse,
+      {
+        language?: string
+        page?: number
+        region?: string
+      } | void
+    >({
+      query: () => "movie/upcoming",
+    }),
+  }),
 })
 
 export const {
-    useGetNowPlayingMoviesQuery,
-    useGetPopularMoviesQuery,
-    useGetTopRatedMoviesQuery,
-    useGetUpcomingMoviesQuery,
-    useSearchMovieQuery,
-    useLazySearchMovieQuery,
+  useGetNowPlayingMoviesQuery,
+  useGetPopularMoviesQuery,
+  useGetTopRatedMoviesQuery,
+  useGetUpcomingMoviesQuery,
 } = moviesApi

@@ -25,7 +25,13 @@
     inset: 0;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     transition: transform 0.25s ease;
+}
+
+.posterBgFallback {
+    background-size: contain;
+    background-color: #eeeeee;
 }
 
 .posterLink:hover .posterBg {
