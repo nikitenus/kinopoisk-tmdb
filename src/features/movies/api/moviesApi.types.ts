@@ -27,3 +27,11 @@ export type SearchMovieArgs = {
   region?: string
   year?: string
 }
+
+export type MoviesListArgs =
+  | {
+      language?: string
+      page?: number
+      region?: string
+    }
+  | undefined

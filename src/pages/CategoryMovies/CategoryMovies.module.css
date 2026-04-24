@@ -1,0 +1,47 @@
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 500px;
+}
+
+.container h2,
+.container h3,
+.container p {
+  margin: 0;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.menuButton {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #9ca3af;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  cursor: pointer;
+}
+
+.menuButton:hover {
+  border-color: #2563eb;
+}
+
+.menuButtonActive {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
