@@ -8,6 +8,7 @@ import { FiltrationPanel } from "@/features/movies/ui/FiltrationPanel/Filtration
 
 const defaultSortBy: DiscoverSortBy = "popularity.desc"
 const defaultRatingRange: [number, number] = [0, 10]
+const ratingDebounceMs = 300
 
 const sortOptions: { value: DiscoverSortBy; label: string }[] = [
   { value: "popularity.desc", label: "Popularity ↓" },
@@ -33,7 +34,7 @@ export const FilteredMovies = () => {
     const timeoutId = window.setTimeout(() => {
       setDebouncedRatingRange(ratingRange)
       setCurrentPage(1)
-    }, 200)
+    }, ratingDebounceMs)
 
     return () => window.clearTimeout(timeoutId)
   }, [ratingRange])
