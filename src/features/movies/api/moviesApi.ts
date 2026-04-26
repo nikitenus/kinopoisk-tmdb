@@ -1,5 +1,8 @@
 import type {
+  DiscoverMoviesArgs,
+  DiscoverMoviesResponse,
   FetchMoviesResponse,
+  MovieGenresResponse,
   MovieCreditsResponse,
   MovieDetailsResponse,
   MoviesListArgs,
@@ -39,6 +42,12 @@ export const moviesApi = baseApi.injectEndpoints({
     getSimilarMovies: build.query<SimilarMoviesResponse, number>({
       query: (id) => ({ url: `/movie/${id}/similar` }),
     }),
+    discoverMovies: build.query<DiscoverMoviesResponse, DiscoverMoviesArgs | void>({
+      query: (params) => ({ url: "/discover/movie", params: params ?? undefined }),
+    }),
+    getMovieGenres: build.query<MovieGenresResponse, void>({
+      query: () => ({ url: "/genre/movie/list" }),
+    }),
   }),
 })
 
@@ -50,4 +59,6 @@ export const {
   useGetMovieByIdQuery,
   useGetMovieCreditsQuery,
   useGetSimilarMoviesQuery,
+  useDiscoverMoviesQuery,
+  useGetMovieGenresQuery,
 } = moviesApi

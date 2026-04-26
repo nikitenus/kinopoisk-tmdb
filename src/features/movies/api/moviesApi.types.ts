@@ -25,6 +25,40 @@ export type SimilarMoviesResponse = {
   total_results: number
 }
 
+export type DiscoverSortBy =
+  | "popularity.desc"
+  | "popularity.asc"
+  | "vote_average.desc"
+  | "vote_average.asc"
+  | "primary_release_date.desc"
+  | "primary_release_date.asc"
+  | "original_title.asc"
+  | "original_title.desc"
+
+export type DiscoverMoviesArgs = {
+  page?: number
+  sort_by?: DiscoverSortBy
+  with_genres?: string
+  "vote_average.gte"?: number
+  "vote_average.lte"?: number
+}
+
+export type DiscoverMoviesResponse = {
+  page: number
+  results: Movie[]
+  total_pages: number
+  total_results: number
+}
+
+export type Genre = {
+  id: number
+  name: string
+}
+
+export type MovieGenresResponse = {
+  genres: Genre[]
+}
+
 export type SearchMovieArgs = {
   query: string
   include_adult?: boolean
