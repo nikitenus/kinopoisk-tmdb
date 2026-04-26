@@ -28,10 +28,10 @@ export type SearchMovieArgs = {
   year?: string
 }
 
-export type MoviesListArgs =
-  | {
-      language?: string
-      page?: number
-      region?: string
-    }
-  | undefined
+export type MoviesListArgs = {
+  language?: string
+  page?: number
+  region?: string
+}
+
+export type NowPlayingResponse = FetchMoviesResponse & { backdropPath: string | null }
