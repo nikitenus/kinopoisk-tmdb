@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import Slider from "@mui/material/Slider"
 import type { DiscoverSortBy } from "@/features/movies/api/moviesApi.types.ts"
 import { useDiscoverMoviesQuery, useGetMovieGenresQuery } from "@/features/movies/api/moviesApi.ts"
 import { MovieItem } from "@/features/movies/ui/MovieItems/MovieItem/MovieItem.tsx"
 import { Pagination } from "@/common/components/Pagination/Pagination.tsx"
 import s from "./FilteredMovies.module.css"
+import { FiltrationPanel } from "@/features/movies/ui/FiltrationPanel/FiltrationPanel.tsx"
 
 const defaultSortBy: DiscoverSortBy = "popularity.desc"
 const defaultRatingRange: [number, number] = [0, 10]
@@ -61,71 +61,20 @@ export const FilteredMovies = () => {
 
   return (
     <section className={s.page}>
-      <aside className={s.filters}>
-        <div className={s.filterBlock}>
-          <h2 className={s.blockTitle}>Filters / Sort</h2>
-          <select
-            className={s.select}
-            value={sortBy}
-            onChange={(event) => {
-              setSortBy(event.target.value as DiscoverSortBy)
-              setCurrentPage(1)
-            }}
-          >
-            {sortOptions.map((option) => (
-              <option
-                key={option.value}
-                value={option.value}
-              >
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className={s.filterBlock}>
-          <h2 className={s.blockTitle}>Rating</h2>
-          <Slider
-            value={ratingRange}
-            onChange={(_, value) => setRatingRange(value as [number, number])}
-            min={0}
-            max={10}
-            step={0.1}
-            valueLabelDisplay="auto"
-          />
-          <p className={s.ratingValue}>
-            {ratingRange[0].toFixed(1)} - {ratingRange[1].toFixed(1)}
-          </p>
-        </div>
-
-        <div className={s.filterBlock}>
-          <h2 className={s.blockTitle}>Genres</h2>
-          <div className={s.genreButtons}>
-            {genresData?.genres.map((genre) => {
-              const isActive = selectedGenres.includes(genre.id)
-
-              return (
-                <button
-                  key={genre.id}
-                  type="button"
-                  className={isActive ? `${s.genreButton} ${s.genreButtonActive}` : s.genreButton}
-                  onClick={() => toggleGenre(genre.id)}
-                >
-                  {genre.name}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        <button
-          type="button"
-          className={s.resetButton}
-          onClick={resetFilters}
-        >
-          Reset filters
-        </button>
-      </aside>
+      <FiltrationPanel
+        sortBy={sortBy}
+        sortOptions={sortOptions}
+        ratingRange={ratingRange}
+        selectedGenres={selectedGenres}
+        genres={genresData?.genres ?? []}
+        onSortChange={(value: DiscoverSortBy) => {
+          setSortBy(value)
+          setCurrentPage(1)
+        }}
+        onRatingChange={setRatingRange}
+        onGenreToggle={toggleGenre}
+        onReset={resetFilters}
+      />
 
       <div className={s.results}>
         <div className={s.resultsHeader}>
