@@ -4,6 +4,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import { useEffect, useState, type MouseEvent } from "react"
 import { FAVORITES_UPDATED_EVENT, isFavoriteMovie, toggleFavoriteMovie } from "@/common/utils/favoritesStorage.ts"
+import { Link, useLocation } from "react-router"
+import { Path } from "@/common/routing/path.ts"
 
 type Props = {
   id: number
@@ -21,15 +23,14 @@ const getRating = (rating: number) => {
 export const MovieItem = ({ id, title, posterPath, voteAverage }: Props) => {
   const posterUrl = posterPath ? `https://image.tmdb.org/t/p/original${posterPath}` : noPoster
   const [isFavorite, setIsFavorite] = useState(() => isFavoriteMovie(id))
+  const location = useLocation()
+  const from = `${location.pathname}${location.search}${location.hash}`
 
   useEffect(() => {
-    setIsFavorite(isFavoriteMovie(id))
-  }, [id])
-
-  useEffect(() => {
-    const handleFavoritesUpdate = () => setIsFavorite(isFavoriteMovie(id))
-    window.addEventListener(FAVORITES_UPDATED_EVENT, handleFavoritesUpdate)
-    return () => window.removeEventListener(FAVORITES_UPDATED_EVENT, handleFavoritesUpdate)
+    const syncFavorite = () => setIsFavorite(isFavoriteMovie(id))
+    syncFavorite()
+    window.addEventListener(FAVORITES_UPDATED_EVENT, syncFavorite)
+    return () => window.removeEventListener(FAVORITES_UPDATED_EVENT, syncFavorite)
   }, [id])
 
   const handleFavoriteClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -48,8 +49,9 @@ export const MovieItem = ({ id, title, posterPath, voteAverage }: Props) => {
   return (
     <div className={s.movieContainer}>
       <div>
-        <a
-          href="#"
+        <Link
+          to={Path.MovieInfo.replace(":id", String(id))}
+          state={{ from }}
           className={s.posterLink}
         >
           <div className={s.posterFrame}>
@@ -69,7 +71,7 @@ export const MovieItem = ({ id, title, posterPath, voteAverage }: Props) => {
             </button>
             <span className={`${s.rating} ${getRating(voteAverage)}`}>{voteAverage.toFixed(1)}</span>
           </div>
-        </a>
+        </Link>
       </div>
       <div>{title}</div>
     </div>

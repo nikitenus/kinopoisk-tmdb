@@ -1,4 +1,11 @@
-import type { FetchMoviesResponse, MoviesListArgs, NowPlayingResponse } from "@/features/movies/api/moviesApi.types.ts"
+import type {
+  FetchMoviesResponse,
+  MovieCreditsResponse,
+  MovieDetailsResponse,
+  MoviesListArgs,
+  NowPlayingResponse,
+  SimilarMoviesResponse,
+} from "@/features/movies/api/moviesApi.types.ts"
 import { baseApi } from "@/app/baseApi.ts"
 
 export const moviesApi = baseApi.injectEndpoints({
@@ -23,6 +30,15 @@ export const moviesApi = baseApi.injectEndpoints({
     getUpcomingMovies: build.query<FetchMoviesResponse, MoviesListArgs | void>({
       query: (params) => ({ url: "movie/upcoming", params: params ?? undefined }),
     }),
+    getMovieById: build.query<MovieDetailsResponse, number>({
+      query: (id) => ({ url: `movie/${id}` }),
+    }),
+    getMovieCredits: build.query<MovieCreditsResponse, number>({
+      query: (id) => ({ url: `movie/${id}/credits` }),
+    }),
+    getSimilarMovies: build.query<SimilarMoviesResponse, number>({
+      query: (id) => ({ url: `/movie/${id}/similar` }),
+    }),
   }),
 })
 
@@ -31,4 +47,7 @@ export const {
   useGetPopularMoviesQuery,
   useGetTopRatedMoviesQuery,
   useGetUpcomingMoviesQuery,
+  useGetMovieByIdQuery,
+  useGetMovieCreditsQuery,
+  useGetSimilarMoviesQuery,
 } = moviesApi

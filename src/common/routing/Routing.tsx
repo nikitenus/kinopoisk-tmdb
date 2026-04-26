@@ -6,6 +6,7 @@ import { FilteredMovies } from "@/pages/FilteredMovies"
 import { SearchPage } from "@/pages/SearchPage"
 import { Favorites } from "@/pages/Favorites"
 import { PageNotFound } from "@/pages/PageNotFound"
+import { MovieInfo } from "@/features/movies/ui/MovieInfo/MovieInfo.tsx"
 
 export const Routing = () => {
   return (
@@ -29,6 +30,10 @@ export const Routing = () => {
       <Route
         path={Path.Favorites}
         element={<Favorites />}
+      />
+      <Route
+        path={Path.MovieInfo}
+        element={<MovieInfo />}
       />
       <Route
         path={Path.PageNotFound}

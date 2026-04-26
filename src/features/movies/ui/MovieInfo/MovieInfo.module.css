@@ -1,0 +1,157 @@
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 500px;
+}
+
+.backLink {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.card {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.poster {
+  width: 360px;
+  min-width: 360px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 760px;
+}
+
+.title {
+  margin: 0;
+}
+
+.meta {
+  margin: 0;
+  color: #4b5563;
+}
+
+.metaLabel {
+  color: #111827;
+  font-weight: 600;
+}
+
+.descriptionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.descriptionTitle {
+  margin: 0;
+  font-size: 20px;
+}
+
+.overview {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.castSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.castGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.castItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+
+.castImage {
+  width: 54px;
+  height: 72px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f3f4f6;
+}
+
+.castInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.castName,
+.castCharacter {
+  margin: 0;
+}
+
+.castName {
+  font-weight: 600;
+}
+
+.castCharacter {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.similarSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.similarMoviesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .container {
+    min-width: 0;
+  }
+
+  .card {
+    flex-direction: column;
+  }
+
+  .poster {
+    width: 100%;
+    min-width: 0;
+    max-width: 400px;
+  }
+
+  .castGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .similarMoviesContainer {
+    justify-content: center;
+  }
+}
