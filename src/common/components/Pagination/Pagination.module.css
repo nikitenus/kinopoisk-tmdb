@@ -16,6 +16,7 @@
     padding: 4px 10px;
     min-width: 36px;
     background: white;
+    color: #111827;
     border: 1px solid #aaa;
     border-radius: 4px;
     cursor: pointer;
@@ -28,7 +29,7 @@
 .pageButtonActive {
     background: #2563eb;
     cursor: default;
-    color: #000;
+    color: #fff;
 }
 
 .ellipsis {
