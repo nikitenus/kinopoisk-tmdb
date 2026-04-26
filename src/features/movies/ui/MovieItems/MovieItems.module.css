@@ -1,10 +1,31 @@
 .container {
-    margin: 0 auto;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.viewMore {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.viewMore:hover {
+  text-decoration: underline;
 }
 
 .items {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
 }
-

@@ -37,18 +37,22 @@ export const MainPage = () => {
         <MovieItems
           data={popular}
           title={"Popular Movies"}
+          viewMoreTo={`${Path.CategoryMovies}?tab=popular&page=1`}
         />
         <MovieItems
           data={topRated}
           title={"Top rated Movies"}
+          viewMoreTo={`${Path.CategoryMovies}?tab=top_rated&page=1`}
         />
         <MovieItems
           data={nowPlaying}
-          title={"Upcoming Movies"}
+          title={"Now Playing Movies"}
+          viewMoreTo={`${Path.CategoryMovies}?tab=now_playing&page=1`}
         />
         <MovieItems
           data={upcoming}
-          title={"Now Playing Movies"}
+          title={"Upcoming Movies"}
+          viewMoreTo={`${Path.CategoryMovies}?tab=upcoming&page=1`}
         />
       </div>
     </>
