@@ -5,12 +5,13 @@ import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router"
 import { useLazySearchMovieQuery } from "@/features/search/api/searchApi.ts"
 import { Pagination } from "@/common/components/Pagination/Pagination.tsx"
+import { PageSkeleton } from "@/common/components/PageSkeleton/PageSkeleton.tsx"
 
 export const SearchPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchParams, setSearchParams] = useSearchParams()
   const queryFromUrl = searchParams.get("query")?.trim() ?? ""
-  const [triggerSearchMovie, { data, isFetching, isError, isUninitialized }] = useLazySearchMovieQuery()
+  const [triggerSearchMovie, { data, isFetching, isLoading, isError, isUninitialized }] = useLazySearchMovieQuery()
 
   useEffect(() => {
     if (!queryFromUrl) return
@@ -22,6 +23,10 @@ export const SearchPage = () => {
     setSearchParams({ query })
   }
 
+  if (queryFromUrl && isLoading) {
+    return <PageSkeleton withSearch />
+  }
+
   return (
     <div className={s.searchPage}>
       <h2>Search results</h2>
@@ -29,10 +34,9 @@ export const SearchPage = () => {
         initialQuery={queryFromUrl}
         onSearch={onSearchHandler}
       />
-      {}
       {isFetching && <p>Loading...</p>}
       {isError && <p>Failed to load search results.</p>}
-      {!isFetching && !isError && (isUninitialized || !data?.results?.length) && (
+      {!isFetching && !isError && isUninitialized && (
         <p>Enter a movie title to start searching.</p>
       )}
       {data?.results?.length ? (
@@ -50,9 +54,10 @@ export const SearchPage = () => {
             ))}
           </div>
         </>
-      ) : (
+      ) : queryFromUrl && !isUninitialized && !isFetching && !isError ? (
         <h3>{`No matches found for "${queryFromUrl}"`}</h3>
-      )}
+      ) : null
+      }
       <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

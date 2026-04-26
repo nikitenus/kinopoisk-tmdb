@@ -9,13 +9,25 @@ import { MovieItems } from "@/features/movies/ui/MovieItems/MovieItems.tsx"
 import { Search } from "@/features/search/ui/Search.tsx"
 import { useNavigate } from "react-router"
 import s from "./MainPage.module.css"
+import { PageSkeleton } from "@/common/components/PageSkeleton/PageSkeleton.tsx"
 
 export const MainPage = () => {
-  const { data: popular } = useGetPopularMoviesQuery()
-  const { data: topRated } = useGetTopRatedMoviesQuery()
-  const { data: nowPlaying } = useGetNowPlayingMoviesQuery()
-  const { data: upcoming } = useGetUpcomingMoviesQuery()
+  const popularQuery = useGetPopularMoviesQuery()
+  const topRatedQuery = useGetTopRatedMoviesQuery()
+  const nowPlayingQuery = useGetNowPlayingMoviesQuery()
+  const upcomingQuery = useGetUpcomingMoviesQuery()
   const navigate = useNavigate()
+  const isLoading =
+    popularQuery.isLoading || topRatedQuery.isLoading || nowPlayingQuery.isLoading || upcomingQuery.isLoading
+
+  if (isLoading) {
+    return <PageSkeleton withSearch />
+  }
+
+  const popular = popularQuery.data
+  const topRated = topRatedQuery.data
+  const nowPlaying = nowPlayingQuery.data
+  const upcoming = upcomingQuery.data
 
   return (
     <>

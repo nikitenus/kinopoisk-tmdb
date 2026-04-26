@@ -5,6 +5,7 @@ import { MovieItem } from "@/features/movies/ui/MovieItems/MovieItem/MovieItem.t
 import { Pagination } from "@/common/components/Pagination/Pagination.tsx"
 import s from "./FilteredMovies.module.css"
 import { FiltrationPanel } from "@/features/movies/ui/FiltrationPanel/FiltrationPanel.tsx"
+import { PageSkeleton } from "@/common/components/PageSkeleton/PageSkeleton.tsx"
 
 const defaultSortBy: DiscoverSortBy = "popularity.desc"
 const defaultRatingRange: [number, number] = [0, 10]
@@ -28,7 +29,7 @@ export const FilteredMovies = () => {
   const [debouncedRatingRange, setDebouncedRatingRange] = useState<[number, number]>(defaultRatingRange)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const { data: genresData } = useGetMovieGenresQuery()
+  const { data: genresData, isLoading: isGenresLoading } = useGetMovieGenresQuery()
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
@@ -39,13 +40,17 @@ export const FilteredMovies = () => {
     return () => window.clearTimeout(timeoutId)
   }, [ratingRange])
 
-  const { data, isFetching, isError } = useDiscoverMoviesQuery({
+  const { data, isFetching, isLoading, isError } = useDiscoverMoviesQuery({
     page: currentPage,
     sort_by: sortBy,
     with_genres: selectedGenres.join(",") || undefined,
     "vote_average.gte": debouncedRatingRange[0],
     "vote_average.lte": debouncedRatingRange[1],
   })
+
+  if (isLoading || isGenresLoading) {
+    return <PageSkeleton withSidebar />
+  }
 
   const toggleGenre = (genreId: number) => {
     setSelectedGenres((prev) => (prev.includes(genreId) ? prev.filter((id) => id !== genreId) : [...prev, genreId]))

@@ -8,6 +8,7 @@ import noPoster from "@/assets/noPoster.svg"
 import { Path } from "@/common/routing/path.ts"
 import { MovieItem } from "@/features/movies/ui/MovieItems/MovieItem/MovieItem.tsx"
 import s from "./MovieInfo.module.css"
+import { PageSkeleton } from "@/common/components/PageSkeleton/PageSkeleton.tsx"
 
 const getReleaseYear = (releaseDate: string) => {
   if (!releaseDate) return "Unknown"
@@ -31,11 +32,7 @@ export const MovieInfo = () => {
   const { data: similarMovies } = useGetSimilarMoviesQuery(movieId)
 
   if (isLoading) {
-    return (
-      <div className={s.container}>
-        <p>Loading movie details...</p>
-      </div>
-    )
+    return <PageSkeleton variant="details" />
   }
 
   const posterUrl = data?.poster_path ? `https://image.tmdb.org/t/p/original${data.poster_path}` : noPoster

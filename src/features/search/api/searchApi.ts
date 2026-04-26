@@ -1,4 +1,5 @@
 import { baseApi } from "@/app/baseApi.ts"
+import { paginatedMoviesResponseSchema } from "@/features/movies/api/moviesApi.types.ts"
 import type { SearchMovieArgs, SearchMoviesResponse } from "@/features/movies/api/moviesApi.types.ts"
 
 export const searchApi = baseApi.injectEndpoints({
@@ -7,6 +8,7 @@ export const searchApi = baseApi.injectEndpoints({
       query: (params) => {
         return { url: "/search/movie", params }
       },
+      transformResponse: (response: unknown) => paginatedMoviesResponseSchema.parse(response),
     }),
   }),
 })

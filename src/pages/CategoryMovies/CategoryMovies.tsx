@@ -8,6 +8,7 @@ import {
 } from "@/features/movies/api/moviesApi.ts"
 import { MovieItem } from "@/features/movies/ui/MovieItems/MovieItem/MovieItem.tsx"
 import { Pagination } from "@/common/components/Pagination/Pagination.tsx"
+import { PageSkeleton } from "@/common/components/PageSkeleton/PageSkeleton.tsx"
 
 const categoryTabs = [
   { key: "popular", label: "Popular" },
@@ -46,6 +47,10 @@ export const CategoryMovies = () => {
     upcoming,
     now_playing: nowPlaying,
   }[currentTab]
+
+  if (activeQuery.isLoading) {
+    return <PageSkeleton />
+  }
 
   const handleTabChange = (tab: CategoryTab) => {
     setSearchParams({ tab, page: "1" })
