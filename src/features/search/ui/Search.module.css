@@ -12,6 +12,7 @@
     width: 100%;
     padding-left: 16px;
     background-color: var(--search-input-bg, #ffffff);
+    color: #000;
 }
 
 .searchInner button {
